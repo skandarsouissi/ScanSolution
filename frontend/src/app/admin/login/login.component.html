@@ -1,0 +1,56 @@
+<body>
+  <div class="form-container">
+    <div class="form-content">
+      <h2 class="logo">Scani</h2>
+      <h3>Sign In</h3>
+      <p>Access your account securely</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Username -->
+        <div>
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            class="input-field"
+            placeholder="Enter your username"
+          />
+          <span class="error-message" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+            Please enter your username
+          </span>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="input-field"
+            placeholder="Enter your password"
+          />
+          <span class="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+            Password is required
+          </span>
+        </div>
+
+        <!-- Stay signed in -->
+        <div>
+          <label>
+            <input type="checkbox" /> Stay signed in
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-primary" [disabled]="loginForm.invalid">
+          Sign In
+        </button>
+      </form>
+
+      <!-- Create account -->
+      <p>New to SecureApp? <a href="#">Create an account</a></p>
+    </div>
+  </div>
+</body>

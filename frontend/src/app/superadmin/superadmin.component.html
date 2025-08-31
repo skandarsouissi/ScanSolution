@@ -1,0 +1,44 @@
+<div class="container">
+  <h2 class ="head">Gestion des Utilisateurs</h2>
+  
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading">
+    <p>Chargement des utilisateurs...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="loadUsers()">Réessayer</button>
+  </div>
+
+  <!-- Users table -->
+  <div *ngIf="!loading && !error">
+    <div *ngIf="users.length === 0" class="no-users">
+      <p>Aucun utilisateur trouvé</p>
+    </div>
+
+    <table *ngIf="users.length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+<th>Role</th>
+<th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td [class]="'role-' + user.role">{{ user.role }}</td>
+          <td>
+<button *ngIf="user.role !== 'ROLE_ADMIN'" (click)="deleteUser(user.id)" class="delete-btn">
+  Supprimer
+</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

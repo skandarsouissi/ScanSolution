@@ -1,0 +1,11 @@
+<section class="search-section">
+  <div class="search-container">
+    <i class="fas fa-search search-icon"></i>
+    <input
+      type="text"
+      placeholder="Rechercher un plat..."
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+    />
+  </div>
+</section>

@@ -1,0 +1,130 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="mb-4">Ajouter un nouveau produit</h2>
+      
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+        <!-- Informations de base -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Nom du produit *</label>
+              <input 
+                type="text" 
+                id="name" 
+                formControlName="name" 
+                class="form-control" 
+                placeholder="Ex: Burger Deluxe"
+                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+                required>
+              <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']">Le nom est requis</div>
+                <div *ngIf="f['name'].errors['minlength']">Le nom doit contenir au moins 3 caractères</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="category">Catégorie *</label>
+              <select 
+                id="category" 
+                formControlName="category" 
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['category'].errors }"
+                required>
+                <option value="">Sélectionner une catégorie</option>
+                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+              </select>
+              <div *ngIf="submitted && f['category'].errors" class="invalid-feedback">
+                <div *ngIf="f['category'].errors['required']">La catégorie est requise</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="description">Description *</label>
+              <textarea 
+                id="description" 
+                formControlName="description" 
+                class="form-control" 
+                rows="4" 
+                placeholder="Description détaillée du produit"
+                [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+                required></textarea>
+              <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                <div *ngIf="f['description'].errors['required']">La description est requise</div>
+                <div *ngIf="f['description'].errors['minlength']">La description doit contenir au moins 10 caractères</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="price">Prix *</label>
+              <input 
+                type="number" 
+                id="price" 
+                formControlName="price" 
+                class="form-control" 
+                placeholder="0.00"
+                [ngClass]="{ 'is-invalid': submitted && f['price'].errors }"
+                required>
+              <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
+                <div *ngIf="f['price'].errors['required']">Le prix est requis</div>
+                <div *ngIf="f['price'].errors['min']">Le prix doit être supérieur à 0</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="image">Image du produit</label>
+              <input 
+                type="file" 
+                id="image" 
+                class="form-control-file"
+                accept="image/*"
+                (change)="onFileSelected($event)">
+              <div *ngIf="previewUrl" class="mt-2">
+                <img [src]="previewUrl" alt="Preview" class="img-thumbnail" style="max-width: 200px;">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="active">Statut</label>
+              <select 
+                id="active" 
+                formControlName="active" 
+                class="form-control">
+                <option [value]="true">Actif</option>
+                <option [value]="false">Inactif</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid || loading">
+              <span *ngIf="!loading">Ajouter le produit</span>
+              <span *ngIf="loading">
+                <i class="fa fa-spinner fa-spin"></i> Ajout en cours...
+              </span>
+            </button>
+            <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">Réinitialiser</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

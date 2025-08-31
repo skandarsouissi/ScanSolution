@@ -1,0 +1,27 @@
+
+
+<div *ngIf="isLoading">Loading products...</div>
+<div *ngIf="error">{{ error }}</div>
+<ul id="masonry" class="row">
+  <li *ngFor="let product of filteredProducts" 
+      class="card-container col-lg-4 col-md-6 m-b30 All {{product.name | lowercase}}">
+    <div class="dz-img-box style-7">
+      <div class="dz-media">
+<img [src]="'http://localhost:8080' + product.imagePath" 
+     alt="{{product.name}}">
+
+        <div class="dz-meta">
+          <ul>
+            <li class="seller">Top Seller</li>
+          
+          </ul>
+        </div>
+      </div>
+      <div class="dz-content">
+        <h5 class="title"><a href="product-detail.html">{{product.name}}</a></h5>
+        <p>{{product.description}}</p>
+        <span class="price">${{product.price}}</span>
+      </div>
+    </div>
+  </li>
+</ul>

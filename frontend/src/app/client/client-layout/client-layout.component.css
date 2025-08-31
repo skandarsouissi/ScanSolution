@@ -1,0 +1,44 @@
+/* Styles pour le layout client */
+.page-wraper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+}
+
+.content-inner {
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.col-xl-10, .col-lg-9, .col-md-12 {
+  padding: 0 15px;
+}
+
+@media (max-width: 1200px) {
+  .col-xl-10 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .col-lg-9 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

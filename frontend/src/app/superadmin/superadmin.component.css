@@ -1,0 +1,131 @@
+/* Container général */
+.container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f4f6f8;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container h2 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Tableau */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  font-size: 15px;
+  background-color: transparent;
+}
+
+/* En-têtes */
+thead th {
+  background-color: #3498db;
+  color: white;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Lignes du tableau */
+tbody tr {
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-radius: 8px;
+}
+
+tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+tbody td {
+  padding: 12px 15px;
+  vertical-align: middle;
+}
+
+/* Badge pour le rôle */
+tbody td:last-child {
+  font-weight: 600;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-align: center;
+  display: inline-block;
+  min-width: 90px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+tbody td:last-child.role-ADMIN { background-color: #27ae60; }
+tbody td:last-child.role-USER { background-color: #2980b9; }
+tbody td:last-child.role-SUPER_ADMIN { background-color: #8e44ad; }
+tbody td:last-child.role-MANAGER { background-color: #d35400; }
+tbody td:last-child.role-GUEST { background-color: #7f8c8d; }
+
+/* Loading / No users / Error */
+.loading, .no-users, .error {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.loading, .no-users { background-color: #ecf0f1; color: #7f8c8d; }
+.error { background-color: #f8d7da; color: #721c24; }
+
+/* Boutons erreur */
+.error button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.error button:hover { background-color: #c0392b; transform: scale(1.05); }
+
+/* Bouton Supprimer */
+.delete-btn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.delete-btn:active {
+  background: linear-gradient(135deg, #a93226, #922b21);
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.head {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #34495e;
+  font-weight: 700;
+}

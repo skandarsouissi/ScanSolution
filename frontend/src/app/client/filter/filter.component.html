@@ -1,0 +1,24 @@
+<div class="site-filters style-1 clearfix">
+  <ul class="filters" data-bs-toggle="buttons">
+
+    <!-- Bouton ALL -->
+    <li class="btn" 
+        [class.active]="activeCategory === 'All'" 
+        (click)="setActiveCategory('All')">
+      <a href="javascript:void(0);">
+        <span><i class="flaticon-fast-food"></i></span>All
+      </a>
+    </li>
+
+    <!-- Boutons dynamiques des catégories -->
+    <li *ngFor="let category of categories" 
+        class="btn" 
+        [class.active]="activeCategory === category.name"
+        (click)="setActiveCategory(category.name)">
+      <a href="javascript:void(0);">
+        <span><i class="flaticon-fast-food"></i></span>{{ category.name }}
+      </a>
+    </li>
+
+  </ul>
+</div>

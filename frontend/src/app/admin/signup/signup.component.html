@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Register</h1>
+
+  <form [formGroup]="validateForm" (ngSubmit)="register()" novalidate>
+    
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" formControlName="username" placeholder="Username">
+      <div class="error" *ngIf="validateForm.get('username')?.touched && validateForm.get('username')?.hasError('required')">
+        Username is required!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Password"
+      >
+      <div class="error" *ngIf="validateForm.get('password')?.touched && validateForm.get('password')?.hasError('required')">
+        Password is required!
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="validateForm.invalid">Register</button>
+  <div class="login-link">
+    <button type="button" (click)="goToLogin()">Already have an account? Login</button>
+  </div>
+  </form>
+</div>

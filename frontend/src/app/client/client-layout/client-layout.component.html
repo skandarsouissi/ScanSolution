@@ -1,0 +1,33 @@
+<div class="page-wraper">
+  <app-header></app-header>
+
+  <div class="page-content bg-white">
+    <app-banner></app-banner>
+    <app-search></app-search>
+    
+    <section class="content-inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-10 col-lg-9 col-md-12">
+            <app-filter></app-filter>
+
+            <!-- Contenu dynamique des routes -->
+            <router-outlet></router-outlet>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+ 
+  
+  <div class="scroltop-progress scroltop-primary">
+    <svg width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+    </svg>
+  </div>
+  
+  <app-footer></app-footer>
+ 
+</div>

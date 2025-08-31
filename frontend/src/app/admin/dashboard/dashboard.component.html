@@ -1,0 +1,198 @@
+<div class="container-fluid mt-4">
+
+  <!-- Boutons de navigation -->
+  <div class="mb-3">
+    <button class="btn btn-success mr-2" (click)="goToAddproduct()">➕ Ajouter un produit</button>
+    <button class="btn btn-primary mr-2" (click)="goToAddCategory()">➕ Ajouter une catégorie</button>
+    <button class="btn btn-secondary" (click)="goToLogin()">🔑 Déconnexion</button>
+  </div>
+
+  <!-- ==================== PRODUITS ==================== -->
+  <h3 class="mt-4">📦 Produits</h3>
+  <table class="table table-bordered table-striped table-hover mt-2">
+    <thead class="thead-dark">
+      <tr>
+        <th>Image</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Catégorie</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="products.length > 0; else noProducts">
+      <tr *ngFor="let product of products">
+        <td>
+       <img *ngIf="product.imagePath" 
+     [src]="'http://localhost:8080' + product.imagePath" 
+     alt="Image produit"
+     class="img-thumbnail" style="max-width: 80px;">
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+        <td>{{ product.category}}</td>
+        <td>
+          <span class="badge" [ngClass]="product.isActive ? 'badge-success' : 'badge-danger'">
+            {{ product.isActive ? 'Actif' : 'Inactif' }}
+          </span>
+        </td>
+        <td>
+         <button class="btn btn-sm btn-warning mr-2" (click)="openEditProductModal(product)">✏️ Modifier</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">🗑️ Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noProducts>
+    <tr><td colspan="7" class="text-center text-muted">Aucun produit trouvé.</td></tr>
+  </ng-template>
+
+  <!-- ==================== CATÉGORIES ==================== -->
+  <h3 class="mt-5">📂 Catégories</h3>
+  <table class="table table-bordered table-striped table-hover mt-2">
+    <thead class="thead-light">
+      <tr>
+        <th>Nom</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="categories.length > 0; else noCategories">
+      <tr *ngFor="let category of categories">
+        <td>{{ category.name }}</td>
+        <td>
+          <span class="badge" [ngClass]="category.Active ? 'badge-success' : 'badge-danger'">
+            {{ category.Active ? 'Actif' : 'Inactif' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-warning mr-2" (click)="openEditModal(category)">✏️ Modifier</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteCategory(category.id!)">🗑️ Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noCategories>
+    <tr><td colspan="3" class="text-center text-muted">Aucune catégorie trouvée.</td></tr>
+  </ng-template>
+
+  <!-- ==================== MODAL ÉDITION CATÉGORIE ==================== -->
+  <div class="modal fade show d-block" *ngIf="showEditModal" tabindex="-1" style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form [formGroup]="editForm" (ngSubmit)="saveCategory()">
+          <div class="modal-header">
+            <h5 class="modal-title">Modifier la catégorie</h5>
+            <button type="button" class="close" (click)="closeEditModal()">×</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Nom</label>
+              <input type="text" class="form-control" formControlName="name"
+                     [ngClass]="{'is-invalid': editForm.get('name')?.invalid && editForm.get('name')?.touched}">
+              <div *ngIf="editForm.get('name')?.errors?.['required']" class="invalid-feedback">
+                Le nom est requis.
+              </div>
+              <div *ngIf="editForm.get('name')?.errors?.['minlength']" class="invalid-feedback">
+                Minimum 3 caractères.
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Statut</label>
+              <select class="form-control" formControlName="isActive">
+                <option [value]="true">Actif</option>
+                <option [value]="false">Inactif</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Annuler</button>
+            <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">💾 Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- ==================== MODAL ÉDITION PRODUIT ==================== -->
+<div class="modal fade show d-block" *ngIf="showEditProductModal" tabindex="-1" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="editProductForm" (ngSubmit)="saveProduct()">
+        <div class="modal-header">
+          <h5 class="modal-title">Modifier le produit</h5>
+          <button type="button" class="close" (click)="closeEditProductModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" class="form-control" formControlName="name"
+                   [ngClass]="{'is-invalid': editProductForm.get('name')?.invalid && editProductForm.get('name')?.touched}">
+            <div *ngIf="editProductForm.get('name')?.errors?.['required']" class="invalid-feedback">
+              Le nom est requis.
+            </div>
+            <div *ngIf="editProductForm.get('name')?.errors?.['minlength']" class="invalid-feedback">
+              Le nom doit contenir au moins 2 caractères.
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" formControlName="description" 
+                      [ngClass]="{'is-invalid': editProductForm.get('description')?.invalid && editProductForm.get('description')?.touched}"></textarea>
+            <div *ngIf="editProductForm.get('description')?.errors?.['required']" class="invalid-feedback">
+              La description est requise.
+            </div>
+            <div *ngIf="editProductForm.get('description')?.errors?.['minlength']" class="invalid-feedback">
+              La description doit contenir au moins 3 caractères.
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Prix</label>
+            <input type="number" class="form-control" formControlName="price" step="0.01" min="0"
+                   [ngClass]="{'is-invalid': editProductForm.get('price')?.invalid && editProductForm.get('price')?.touched}">
+            <div *ngIf="editProductForm.get('price')?.errors?.['required']" class="invalid-feedback">
+              Le prix est requis.
+            </div>
+            <div *ngIf="editProductForm.get('price')?.errors?.['min']" class="invalid-feedback">
+              Le prix doit être supérieur à 0.
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Catégorie</label>
+            <select class="form-control" formControlName="category"
+                    [ngClass]="{'is-invalid': editProductForm.get('category')?.invalid && editProductForm.get('category')?.touched}">
+              <option value="">-- Sélectionner une catégorie --</option>
+              <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+            </select>
+            <div *ngIf="editProductForm.get('category')?.errors?.['required']" class="invalid-feedback">
+              Veuillez sélectionner une catégorie.
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Statut</label>
+            <select class="form-control" formControlName="isActive">
+              <option [value]="true">Actif</option>
+              <option [value]="false">Inactif</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Image</label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)">
+            <div *ngIf="imageError" class="invalid-feedback">
+              {{ imageError }}
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeEditProductModal()">Annuler</button>
+          <button type="submit" class="btn btn-primary" [disabled]="editProductForm.invalid">💾 Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
