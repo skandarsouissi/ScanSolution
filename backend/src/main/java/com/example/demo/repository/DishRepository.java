@@ -14,4 +14,5 @@ public interface DishRepository extends JpaRepository<Dish, Long> {
 
     @Query("SELECT d FROM Dish d WHERE LOWER(d.name) LIKE LOWER(CONCAT('%', :query, '%')) AND d.isActive = true")
     List<Dish> searchActiveDishes(String query);
+
 }

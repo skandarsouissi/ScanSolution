@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 export interface AuthResponse {
   token: string;
   role: string;
+    id: number; 
 }
 
 @Injectable({

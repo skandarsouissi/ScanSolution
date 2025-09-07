@@ -80,7 +80,9 @@ public class SecurityConfig {
                                 "/api/dishes/search",
                                 "/api/categories/active",
                                  "/api/dishes/**",
-                                "/api/users/**"
+                                "/api/users/**",
+                                "/api/tables/**"
+
                         )
                         .permitAll()
                         .anyRequest()

@@ -1,26 +1,23 @@
+<div *ngIf="isLoading" class="loading">Loading products...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
 
-
-<div *ngIf="isLoading">Loading products...</div>
-<div *ngIf="error">{{ error }}</div>
-<ul id="masonry" class="row">
+<ul id="product-grid" class="row product-grid">
   <li *ngFor="let product of filteredProducts" 
-      class="card-container col-lg-4 col-md-6 m-b30 All {{product.name | lowercase}}">
+      class="card-container col-lg-4 col-md-6 col-sm-12 m-b30 All {{product.name | lowercase}}">
     <div class="dz-img-box style-7">
       <div class="dz-media">
-<img [src]="'http://localhost:8080' + product.imagePath" 
-     alt="{{product.name}}">
-
+        <img [src]="'http://localhost:8080' + product.imagePath" 
+             alt="{{product.name}}">
         <div class="dz-meta">
           <ul>
             <li class="seller">Top Seller</li>
-          
           </ul>
         </div>
       </div>
       <div class="dz-content">
         <h5 class="title"><a href="product-detail.html">{{product.name}}</a></h5>
         <p>{{product.description}}</p>
-        <span class="price">${{product.price}}</span>
+        <span class="price">{{product.price}}DT</span>
       </div>
     </div>
   </li>

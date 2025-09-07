@@ -24,6 +24,7 @@ public class Dish {
 
     private String allergens;
 
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;

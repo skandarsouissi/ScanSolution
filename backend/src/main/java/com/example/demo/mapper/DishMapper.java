@@ -12,8 +12,12 @@ public interface DishMapper {
     DishMapper INSTANCE = Mappers.getMapper(DishMapper.class);
 
     @Mapping(source = "category.id", target = "categoryId")
+
     DishDTO toDto(Dish dish);
 
     @Mapping(target = "category", ignore = true)
+
     Dish toEntity(DishDTO dishDTO);
+
+
 }

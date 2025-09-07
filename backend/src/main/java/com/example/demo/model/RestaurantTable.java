@@ -17,4 +17,9 @@ public class RestaurantTable {
 
     @Column(nullable = false)
     private String qrUrl;
+    @Lob
+    @Column(name = "qr_code_base64", columnDefinition = "LONGTEXT")
+    private String qrCodeBase64;
+
+
 }

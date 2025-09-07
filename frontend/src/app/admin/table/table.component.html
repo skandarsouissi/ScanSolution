@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Tables du restaurant</h2>
+
+  <form [formGroup]="tableForm" (ngSubmit)="createTable()" class="table-form">
+    <input formControlName="code" placeholder="Code de la table" required>
+    <button type="submit">Créer Table</button>
+  </form>
+
+  <div class="table-card" *ngFor="let table of tables">
+    <p><strong>Code:</strong> {{ table.code }}</p>
+    <p><strong>Lien:</strong> 
+      <a [href]="table.qrUrl" target="_blank">{{ table.qrUrl }}</a>
+    </p>
+    <p><strong>QR Code:</strong></p>
+    <img *ngIf="table.qrBase64" [src]="'data:image/png;base64,' + table.qrBase64" alt="QR Code Table">
+    <button class="delete-btn" (click)="deleteTable(table.id!)">Supprimer</button>
+  </div>
+</div>

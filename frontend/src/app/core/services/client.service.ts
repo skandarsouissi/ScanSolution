@@ -39,4 +39,5 @@ export class ClientService {
     const url = 'http://localhost:8080/api/products';
     return this.http.get<Product[]>(url);
   }
+  
 }

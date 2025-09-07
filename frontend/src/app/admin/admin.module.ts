@@ -7,10 +7,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { TableComponent } from './table/table.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TableComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

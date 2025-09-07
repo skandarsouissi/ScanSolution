@@ -13,4 +13,5 @@ public class DishDTO {
     private String allergens;
     private Long categoryId;
     private boolean isActive=true;
+
 }

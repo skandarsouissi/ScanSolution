@@ -1,84 +1,80 @@
-<div class="container-fluid mt-4">
+<div class="dashboard-container">
 
-  <!-- Boutons de navigation -->
-  <div class="mb-3">
-    <button class="btn btn-success mr-2" (click)="goToAddproduct()">➕ Ajouter un produit</button>
-    <button class="btn btn-primary mr-2" (click)="goToAddCategory()">➕ Ajouter une catégorie</button>
+  <!-- Boutons principaux -->
+  <div class="dashboard-actions">
+    <button class="btn btn-success" (click)="goToAddproduct()">➕ Ajouter un produit</button>
+    <button class="btn btn-primary" (click)="goToAddCategory()">➕ Ajouter une catégorie</button>
     <button class="btn btn-secondary" (click)="goToLogin()">🔑 Déconnexion</button>
+    <button class="btn btn-info" (click)="goTotable()">📋 Gérer les tables</button>
   </div>
 
-  <!-- ==================== PRODUITS ==================== -->
-  <h3 class="mt-4">📦 Produits</h3>
-  <table class="table table-bordered table-striped table-hover mt-2">
-    <thead class="thead-dark">
-      <tr>
-        <th>Image</th>
-        <th>Nom</th>
-        <th>Description</th>
-        <th>Prix</th>
-        <th>Catégorie</th>
-        <th>Statut</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="products.length > 0; else noProducts">
-      <tr *ngFor="let product of products">
-        <td>
-       <img *ngIf="product.imagePath" 
-     [src]="'http://localhost:8080' + product.imagePath" 
-     alt="Image produit"
-     class="img-thumbnail" style="max-width: 80px;">
-        </td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</td>
-        <td>{{ product.category}}</td>
-        <td>
-          <span class="badge" [ngClass]="product.isActive ? 'badge-success' : 'badge-danger'">
-            {{ product.isActive ? 'Actif' : 'Inactif' }}
-          </span>
-        </td>
-        <td>
-         <button class="btn btn-sm btn-warning mr-2" (click)="openEditProductModal(product)">✏️ Modifier</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">🗑️ Supprimer</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Tableau PRODUITS -->
+  <div class="table-section">
+    <h3>Produits</h3>
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Prix</th>
+          <th>Catégorie</th>
+        
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="products.length > 0; else noProducts">
+        <tr *ngFor="let product of products">
+          <td>
+            <img *ngIf="product.imagePath" [src]="'http://localhost:8080' + product.imagePath" alt="Image produit" class="product-img">
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+          <td>{{ product.category }}</td>
+     
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="openEditProductModal(product)">✏️ Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">🗑️ Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noProducts>
+      <tr><td colspan="7" class="text-center text-muted">Aucun produit trouvé.</td></tr>
+    </ng-template>
+  </div>
 
-  <ng-template #noProducts>
-    <tr><td colspan="7" class="text-center text-muted">Aucun produit trouvé.</td></tr>
-  </ng-template>
+  <!-- Tableau CATÉGORIES -->
+  <div class="table-section">
+    <h3>Catégories</h3>
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+       
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="categories.length > 0; else noCategories">
+        <tr *ngFor="let category of categories">
+          <td>{{ category.name }}</td>
+       
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="openEditModal(category)">✏️ Modifier</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id!)">🗑️ Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noCategories>
+      <tr><td colspan="3" class="text-center text-muted">Aucune catégorie trouvée.</td></tr>
+    </ng-template>
+  </div>
 
-  <!-- ==================== CATÉGORIES ==================== -->
-  <h3 class="mt-5">📂 Catégories</h3>
-  <table class="table table-bordered table-striped table-hover mt-2">
-    <thead class="thead-light">
-      <tr>
-        <th>Nom</th>
-        <th>Statut</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="categories.length > 0; else noCategories">
-      <tr *ngFor="let category of categories">
-        <td>{{ category.name }}</td>
-        <td>
-          <span class="badge" [ngClass]="category.Active ? 'badge-success' : 'badge-danger'">
-            {{ category.Active ? 'Actif' : 'Inactif' }}
-          </span>
-        </td>
-        <td>
-          <button class="btn btn-sm btn-warning mr-2" (click)="openEditModal(category)">✏️ Modifier</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteCategory(category.id!)">🗑️ Supprimer</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+</div>
 
-  <ng-template #noCategories>
-    <tr><td colspan="3" class="text-center text-muted">Aucune catégorie trouvée.</td></tr>
-  </ng-template>
+  
 
   <!-- ==================== MODAL ÉDITION CATÉGORIE ==================== -->
   <div class="modal fade show d-block" *ngIf="showEditModal" tabindex="-1" style="background: rgba(0,0,0,0.5);">
@@ -118,7 +114,7 @@
     </div>
   </div>
 
-</div>
+
 <!-- ==================== MODAL ÉDITION PRODUIT ==================== -->
 <div class="modal fade show d-block" *ngIf="showEditProductModal" tabindex="-1" style="background: rgba(0,0,0,0.5);">
   <div class="modal-dialog">

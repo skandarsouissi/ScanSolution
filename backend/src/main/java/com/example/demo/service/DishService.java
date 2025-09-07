@@ -7,6 +7,7 @@ import com.example.demo.model.Category;
 import com.example.demo.model.Dish;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.DishRepository;
+import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,10 +23,12 @@ import java.util.stream.Collectors;
 public class DishService {
     private final DishRepository dishRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
-    public DishService(DishRepository dishRepository, CategoryRepository categoryRepository) {
+    public DishService(DishRepository dishRepository, CategoryRepository categoryRepository,    UserRepository userRepository) {
         this.dishRepository = dishRepository;
         this.categoryRepository = categoryRepository;
+        this.userRepository=userRepository;
     }
 
     public List<DishDTO> getAllDishes() {
@@ -33,6 +36,7 @@ public class DishService {
                 .map(DishMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
     }
+
 
     public List<DishDTO> getActiveDishes() {
         return dishRepository.findByIsActive(true).stream()
@@ -118,6 +122,7 @@ public class DishService {
         }
         dishRepository.deleteById(id);
     }
+
 
     private String saveImage(MultipartFile imageFile) throws IOException {
         String uploadDir = "C:/Users/SERVTECH/Desktop/Backend Spring/demo/uploads/";

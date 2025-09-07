@@ -18,9 +18,6 @@ import { FilterComponent } from '../filter/filter.component';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-encodeURI(arg0: string|undefined) {
-throw new Error('Method not implemented.');
-}
   products: Product[] = [];
   filteredProducts: Product[] = [];
   categories: Category[] = [];
@@ -47,6 +44,8 @@ throw new Error('Method not implemented.');
     
     this.filterService.selectedCategory$.subscribe(category => {
       this.activeCategory = category;
+      console.log(`Selected category changed to: ${category}`); // Log selected category
+      
       this.applyFilters();
     });
   }
@@ -58,7 +57,7 @@ throw new Error('Method not implemented.');
     this.productService.getActiveProducts().subscribe({
       next: (data: Product[]) => {
         this.products = data;
-        console.log('Loaded products:', this.products); // Log loaded products
+        console.log('Loaded products:', ...this.products); // Log loaded products
         this.applyFilters();
         this.isLoading = false;
       },
@@ -89,13 +88,13 @@ throw new Error('Method not implemented.');
     console.log(`Current products:`, this.products); // Log current products
     let temp = [...this.products];
 
-    if (this.activeCategory !== 'All') {
+    if (this.activeCategory.toLowerCase() !== 'all') {
       temp = temp.filter(p => {
         // Handle both string and Category object types with proper type checking
         if (typeof p.category === 'string') {
-          return p.category === this.activeCategory;
+          return p.category.toLowerCase() === this.activeCategory.toLowerCase();
         } else if (typeof p.category === 'object' && p.category !== null) {
-          return (p.category as Category).name === this.activeCategory;
+          return (p.category as Category).name.toLowerCase() === this.activeCategory.toLowerCase();
         }
         return false;
       });
@@ -107,7 +106,16 @@ throw new Error('Method not implemented.');
       );
     }
 
-    console.log(`Filtered products:`, temp); 
+    console.log(`Filtered products:`, temp);
     this.filteredProducts = temp;
   }
+  
 }
+  setTimeout(() => {
+    const grid = document.getElementById('product-grid');
+    if (grid) {
+      grid.style.display = 'none';
+      grid.offsetHeight; // trigger reflow
+      grid.style.display = 'flex';
+    }
+  }, 50);

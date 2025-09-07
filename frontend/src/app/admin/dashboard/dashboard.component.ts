@@ -41,6 +41,7 @@ imageError: string | null = null;
     this.loadCategories();
     this.loadProducts();
     
+    
     this.editForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       isActive: [true]
@@ -79,6 +80,16 @@ imageError: string | null = null;
 
 }
   
+isModalOpen = false;
+
+openModal() {
+  this.isModalOpen = true;
+}
+
+closeModal() {
+  this.isModalOpen = false;
+}
+
 
   loadCategories(): void {
     this.isLoading = true;
@@ -118,6 +129,9 @@ imageError: string | null = null;
   
   goToAddproduct() {
     this.router.navigate(['/admin/add-product']);
+  }
+   goTotable() {
+    this.router.navigate(['/admin/table']);
   }
 
   openEditProductModal(product: ProductResponse): void {
@@ -252,6 +266,7 @@ imageError: string | null = null;
       ...this.editingCategory,
       ...this.editForm.value
     };
+   
 
     this.adminService.updateCategory(this.editingCategory.id!, updatedCategory).subscribe({
       next: () => {

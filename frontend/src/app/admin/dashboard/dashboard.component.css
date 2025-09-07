@@ -1,207 +1,208 @@
-body {
-    background-color: color(srgb red green blue);
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-nav {
-    background-color: #271111;
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgb(0, 0, 0);
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.container div:first-child {
-    color: #eb2525;
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.025em;
-}
-.button-container {
-    display: flex;
-    gap: 1rem;
-}
-button {
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-#addCategoryBtn {
-    background-color: #f63b3b;
-    color: red;
-}
-#addCategoryBtn:hover {
-    background-color: #eb2525;
-    transform: scale(1.05);
-}
-#logoutBtn {
-    background-color: #ef4444;
-    color: #ffffff;
-}
-#logoutBtn:hover {
-    background-color: #dc2626;
-    transform: scale(1.05);
-}
-@media (max-width: 640px) {
-    .container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .button-container {
-        justify-content: center;
-    }
-}
-
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 0;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.modal-header h3 {
-  margin: 0;
-  color: #333;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #666;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.close-btn:hover {
-  color: #000;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.modal-footer {
-  padding: 20px;
-  border-top: 1px solid #eee;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
-}
-
-.form-group input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.form-group input[type="checkbox"] {
-  margin-right: 8px;
-}
-
-.form-group div[style*="color:red"] {
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-/* Table styles */
+/* Container général */
 .dashboard-container {
-  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.actions-section {
+/* Boutons principaux */
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 30px;
 }
 
-.categories-section {
-  background: white;
-  padding: 20px;
+.dashboard-actions .btn {
+  padding: 10px 18px;
+  font-weight: bold;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 
-.table {
+.dashboard-actions .btn-success {
+  background: linear-gradient(135deg, #4CAF50, #66BB6A);
+  color: white;
+}
+.dashboard-actions .btn-success:hover { transform: scale(1.05); }
+
+.dashboard-actions .btn-primary {
+  background: linear-gradient(135deg, #2196F3, #42A5F5);
+  color: white;
+}
+.dashboard-actions .btn-primary:hover { transform: scale(1.05); }
+
+.dashboard-actions .btn-secondary {
+  background: #999;
+  color: white;
+}
+.dashboard-actions .btn-secondary:hover { background: #777; }
+
+/* Sections tableau */
+.table-section {
+  margin-bottom: 50px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Titres */
+.table-section h3 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #333;
+  position: relative;
+}
+.table-section h3::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  margin-top: 5px;
+  border-radius: 2px;
+}
+
+/* Tableau custom */
+.custom-table {
   width: 100%;
-  margin-top: 20px;
+  border-collapse: collapse;
+  font-size: 14px;
 }
 
-.btn {
+.custom-table thead {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: white;
+}
+
+.custom-table th, .custom-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.product-img {
+  max-width: 80px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+/* Badges */
+.badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: white;
+  font-size: 12px;
+}
+.badge-success { background-color: #4CAF50; }
+.badge-danger { background-color: #F44336; }
+
+/* Actions boutons */
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 6px;
   margin-right: 5px;
 }
 
-.badge {
-  padding: 0.25em 0.4em;
-  font-size: 75%;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 0.25rem;
+.btn-warning { background-color: #FFC107; color: #fff; }
+.btn-warning:hover { background-color: #FFA000; }
+
+.btn-danger { background-color: #F44336; color: #fff; }
+.btn-danger:hover { background-color: #D32F2F; }
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .dashboard-actions {
+    flex-direction: column;
+  }
+
+  .custom-table th, .custom-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .product-img {
+    max-width: 60px;
+  }
+}
+/* Container des actions */
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+  justify-content: flex-start; /* ou center si tu veux centrer */
 }
 
-.badge-success {
-  color: #fff;
-  background-color: #28a745;
+/* Style général des boutons */
+.dashboard-actions .btn {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.badge-danger {
-  color: #fff;
-  background-color: #dc3545;
+/* Bouton Ajouter produit */
+.btn-success {
+  background: linear-gradient(135deg, #28a745, #71c98f);
+  color: white;
 }
 
-.loading, .no-categories {
-  text-align: center;
-  padding: 40px;
-  color: #666;
+.btn-success:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(40, 167, 69, 0.5);
+  background: linear-gradient(135deg, #218838, #5aa875);
 }
+
+/* Bouton Ajouter catégorie */
+.btn-primary {
+  background: linear-gradient(135deg, #007bff, #66b2ff);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.5);
+  background: linear-gradient(135deg, #0069d9, #3399ff);
+}
+
+/* Bouton Déconnexion */
+.btn-secondary {
+  background: linear-gradient(135deg, #6c757d, #a0a5ab);
+  color: white;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(108, 117, 125, 0.5);
+  background: linear-gradient(135deg, #5a6268, #888f95);
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .dashboard-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

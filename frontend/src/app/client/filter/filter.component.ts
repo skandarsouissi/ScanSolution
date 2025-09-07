@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ClientService, Category, Product } from '../../core/services/client.service';
 import { FilterService } from '../../core/services/filter.service';
 import { Output, EventEmitter, Input } from '@angular/core';
+import { CategoryService } from '../../admin/category.service';
 
 @Component({
   selector: 'app-filter',
@@ -10,6 +11,7 @@ import { Output, EventEmitter, Input } from '@angular/core';
   imports: [CommonModule],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
+  
 })
 export class FilterComponent implements OnInit {
   categories: Category[] = [];

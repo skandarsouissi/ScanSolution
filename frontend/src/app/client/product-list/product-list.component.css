@@ -1,0 +1,79 @@
+/* Container des cartes */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* espace entre les cartes */
+  margin-bottom: 50px; /* éviter chevauchement footer */
+  justify-content: center; /* centrer les cartes */
+}
+
+/* Cartes individuelles - 3 par ligne */
+.card-container {
+  flex: 1 1 calc(33.333% - 20px); /* 3 colonnes */
+  max-width: 300px; /* largeur max pour uniformité */
+  margin-bottom: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Carte style */
+.card-container .dz-img-box {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-container .dz-img-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Image */
+.card-container img {
+  width: 100%;
+  height: 180px; /* hauteur compacte */
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.card-container img:hover {
+  transform: scale(1.05);
+}
+
+/* Contenu des cartes */
+.dz-content {
+  padding: 10px;
+  text-align: center;
+}
+
+.dz-content .title {
+  font-size: 1rem;
+  margin: 5px 0;
+  font-weight: 600;
+}
+
+.dz-content p {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Prix */
+.card-container .price {
+  /* conserver couleur originale */
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .card-container {
+    flex: 1 1 calc(50% - 20px); /* 2 colonnes sur tablettes */
+  }
+}
+
+@media (max-width: 576px) {
+  .card-container {
+    flex: 1 1 100%; /* 1 colonne sur mobiles */
+  }
+}

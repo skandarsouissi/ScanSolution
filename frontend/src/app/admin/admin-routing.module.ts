@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: "add-categories", component: AddCategoriesComponent},
   { path: "add-categories/:id", component: AddCategoriesComponent },
   { path: "add-product", component: AddProductComponent },
+    { path: 'table', component: TableComponent },
 ];
 
 @NgModule({
@@ -23,3 +24,4 @@ const routes: Routes = [
 })
 export class AdminRoutingModule { }
 import { Injectable } from '@angular/core';
+import { TableComponent } from './table/table.component';

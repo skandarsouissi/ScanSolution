@@ -10,6 +10,7 @@ public class CategoryDTO {
     private boolean isActive=true;
 
 
+
 }
 
 
